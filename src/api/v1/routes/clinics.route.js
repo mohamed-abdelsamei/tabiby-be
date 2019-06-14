@@ -1,10 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
-
+const controller = require('./../controllers/clinic.controller');
 /* GET users listing. */
-router.get('/', (req, res, next) => {
-  res.send('respond with a resource');
-});
+router.post('/', controller.create);
+router.get('/', controller.find);
+router.get('/:id', controller.findOne);
+router.put('/:id', controller.update);
+router.put('/:id/speciality', controller.updateSpeciality);
+router.delete('/:id', controller.remove);
 
 module.exports = router;

@@ -11,26 +11,21 @@ module.exports.create = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { name, nameAr } = req.body;
   const { id } = req.params;
-  const speciality = await Speciality.findOne({ _id: id });
-  speciality.name = name;
-  speciality.nameAr = nameAr;
-  await speciality.save();
+  const speciality = await Speciality.findByIdAndUpdate(id, req.body, { new: true });
   res.json(speciality);
 };
 
 
-module.exports.delete = async (req, res, nex) => {
+module.exports.remove = async (req, res, nex) => {
   const { id } = req.params;
-  const speciality = await Speciality.findOne({ _id: id });
-  await speciality.remove();
+  const speciality = await Speciality.findByIdAndDelete(id);
   res.json(speciality);
 };
 
 module.exports.findOne = async (req, res, nex) => {
   const { id } = req.params;
-  const speciality = await Speciality.findOne({ _id: id });
+  const speciality = await Speciality.findById(id);
   res.json(speciality);
 };
 

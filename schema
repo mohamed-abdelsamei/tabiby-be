@@ -1,0 +1,55 @@
+- user
+  - name
+  - phone [unique]
+  - avatar
+  - email
+  - password
+- doctor
+  - name
+  - phone
+  - avatar
+  - email
+  - password
+  - degree
+  - speciality
+  - certificates
+  - bio
+
+- nurse
+  - name
+  - phone
+  - avatar
+  - email
+  - password
+  - clinics [array]
+
+- clinic
+  - name
+  - address
+  - phone
+  - gallery
+  - doctor
+  - nurses [array]
+  - desc
+  - rate
+  - fees
+  - speciality
+  - subSpeciality
+  - workingHours {
+                  - sat : [array {from to}]
+                  - sun
+                  - mon
+                  - tue
+                  - wed
+                  - thu
+                  - fri
+                }
+- reservation
+  - clinic
+  - doctor
+  - user
+  - fees
+  - date {date - time - slotId}
+  - notes
+  - prescription [{id, name, quantity, notes}]
+  -

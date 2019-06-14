@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { Schema } = mongoose;
 
 
-const userSchema = new Schema({
+const nurseSchema = new Schema({
   name: { type: String, required: true },
   phone: {
     number: { type: String, required: true, unique: true },
@@ -14,10 +14,14 @@ const userSchema = new Schema({
   avatar: { type: String },
   email: { type: String },
   password: { type: String },
+  speciality: { type: String },
+  degree: { type: String },
+  certificates: [],
+  bio: { type: String },
 });
 
 // pre
-userSchema.pre('save', (next) => {
+nurseSchema.pre('save', (next) => {
   if (this.password) {
     const salt = bcrypt.genSaltSync(10);
     this.password = bcrypt.hashSync(this.password, salt);
@@ -26,11 +30,11 @@ userSchema.pre('save', (next) => {
 });
 
 
-userSchema.methods.toJSON = () => {
+nurseSchema.methods.toJSON = () => {
   const obj = this.toObject();
   delete obj.password;
   obj.id = obj._id;
   return obj;
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Nurse', nurseSchema);
