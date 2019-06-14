@@ -10,7 +10,7 @@ module.exports.create = async (req, res, next) => {
     await clinic.save();
     res.json(clinic);
   } catch (error) {
-
+    next(error)
   }
 
 };
