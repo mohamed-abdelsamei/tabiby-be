@@ -30,6 +30,7 @@ exports.connect = () => {
     useCreateIndex: true,
     useNewUrlParser: true,
     useFindAndModify: false,
+    useUnifiedTopology: true,
   });
   return mongoose.connection;
 };

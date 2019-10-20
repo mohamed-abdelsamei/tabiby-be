@@ -1,5 +1,3 @@
-// const clinicModel = require('./../models/clinic.model');
-
 class ClinicService {
   constructor(clinicModel, specialityModel) {
     this.clinicModel = clinicModel;
