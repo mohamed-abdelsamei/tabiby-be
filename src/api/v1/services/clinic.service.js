@@ -4,8 +4,17 @@ class ClinicService {
     this.specialityModel = specialityModel;
   }
 
-  async createClinic(content) {
-    const clinic = await this.clinicModel.create(content);
+  async createClinic(payload) {
+    if (payload.speciality) {
+      const speciality = await this.specialityModel.findOne({ _id: payload.speciality }).select('id name nameAr');
+      if (!speciality) throw new Error('Speciality not found');
+      console.log(speciality);
+      console.log(speciality.mini());
+
+      payload.speciality = speciality.mini();
+    }
+
+    const clinic = await this.clinicModel.create(payload);
     return clinic;
   }
 
@@ -23,12 +32,7 @@ class ClinicService {
     if (payload.speciality) {
       const speciality = await this.specialityModel.findOne({ _id: payload.speciality }).select('id name nameAr');
       if (!speciality) throw new Error('Speciality not found');
-
-      payload.speciality = {
-        ref: speciality.id,
-        name: speciality.name,
-        nameAr: speciality.nameAr,
-      };
+      payload.speciality = speciality.mini();
     }
 
     const clinic = await this.clinicModel.findOneAndUpdate(query, payload, { new: true });
@@ -38,12 +42,6 @@ class ClinicService {
   async removeClinic(query) {
     const clinic = await this.clinicModel.findOneAndRemove(query);
     return clinic;
-  }
-
-  async updateSpeciality(clinicId, specialityId) {
-    const speciality = await this.specialityModel.findById(specialityId);
-    if (!speciality) throw new Error('Specielity not found');
-    return this.update({ _id: clinicId }, {});
   }
 }
 module.exports = ClinicService;

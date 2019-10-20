@@ -130,4 +130,131 @@ router.put('/:id', controller.update);
  */
 router.delete('/:id', controller.remove);
 
+/**
+ * @swagger
+ * /clinics/{id}/reservation:
+ *   get:
+ *     tags:
+ *       - Clinic
+ *     description: view clinic reservations.
+ *     operationId: getReservations
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Successfully listed.
+ *       400:
+ *         description: Invalid input.
+ *         schema:
+ *       500:
+ *         description: Internal error.
+ *         schema:
+ */
+router.post('/:id/reservation', (req, res, next) => { });
+
+/**
+ * @swagger
+ * /clinics/{id}/reservation:
+ *   post:
+ *     tags:
+ *       - Clinic
+ *     description: create reservation.
+ *     operationId: createReservation
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Successfully listed.
+ *       400:
+ *         description: Invalid input.
+ *         schema:
+ *       500:
+ *         description: Internal error.
+ *         schema:
+ */
+router.post('/:id/reservation', (req, res, next) => { });
+
+/**
+ * @swagger
+ * /clinics/{id}/reservation/{rid}:
+ *   get:
+ *     tags:
+ *       - Clinic
+ *     description: view reservation.
+ *     operationId: getReservation
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Successfully listed.
+ *       400:
+ *         description: Invalid input.
+ *         schema:
+ *       500:
+ *         description: Internal error.
+ *         schema:
+ */
+router.post('/:id/reservation/:rid', (req, res, next) => { });
+
+/**
+ * @swagger
+ * /clinics/{id}/reservation/{rid}:
+ *   put:
+ *     tags:
+ *       - Clinic
+ *     description: update reservation.
+ *     operationId: updateReservation
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Successfully listed.
+ *       400:
+ *         description: Invalid input.
+ *         schema:
+ *       500:
+ *         description: Internal error.
+ *         schema:
+ */
+router.put('/:id/reservation/:rid', (req, res, next) => { });
+
+
+/**
+* @swagger
+* /clinics/{id}/reservation/{rid}:
+*   delete:
+*     tags:
+*       - Clinic
+*     description: delete reservation.
+*     operationId: deleteReservation
+*     consumes:
+*       - application/json
+*     produces:
+*       - application/json
+*     parameters:
+*     responses:
+*       200:
+*         description: Successfully listed.
+*       400:
+*         description: Invalid input.
+*         schema:
+*       500:
+*         description: Internal error.
+*         schema:
+*/
+
+router.delete('/:id/reservation/:rid', (req, res, next) => { });
+
 module.exports = router;

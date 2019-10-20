@@ -1,9 +1,10 @@
-const app = require('./services/express');
-const mongoose = require('./services/mongoose');
-const swagger = require('./services/swagger');
-const routes = require('./services/routes');
+const app = require('./startup/express');
+const mongoose = require('./startup/mongoose');
+const swagger = require('./startup/swagger');
+const routes = require('./startup/routes');
 
 routes(app);
+
 swagger(app);
 
 mongoose.connect();

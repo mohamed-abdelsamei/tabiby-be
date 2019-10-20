@@ -17,4 +17,9 @@ specialitySchema.set('toJSON', {
   },
 });
 
+specialitySchema.methods.mini = function mini() {
+  const { id, name, nameAr } = this;
+  return { ref: id, name, nameAr };
+};
+
 module.exports = mongoose.model('Speciality', specialitySchema);

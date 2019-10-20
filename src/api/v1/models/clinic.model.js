@@ -54,4 +54,7 @@ clinicSchema.methods = {
   },
 };
 
+clinicSchema.plugin(require('mongoose-keywords'), { paths: ['name', 'speciality.name', 'speciality.nameAr'] });
+
+
 module.exports = mongoose.model('Clinic', clinicSchema);

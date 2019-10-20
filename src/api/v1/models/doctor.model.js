@@ -40,4 +40,5 @@ doctorSchema.methods.toJSON = () => {
   return obj;
 };
 
+
 module.exports = mongoose.model('Doctor', doctorSchema);
