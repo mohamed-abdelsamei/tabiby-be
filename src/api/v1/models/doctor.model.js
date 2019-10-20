@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -18,7 +20,9 @@ const doctorSchema = new Schema({
   degree: { type: String },
   certificates: [],
   bio: { type: String },
+  // clinic: { type: mongoose.Schema.Types.ObjectId, ref: 'Clinic' },
 });
+
 
 // pre
 doctorSchema.pre('save', (next) => {

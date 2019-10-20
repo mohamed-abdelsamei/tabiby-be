@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 
-const clinicSchema = new Schema({
+const reservationSchema = new Schema({
   clinic: {
-    ref: mongoose.Types.ObjectId,
+    ref: { type: mongoose.Types.ObjectId, ref: 'Clinic' },
     name: String,
     avatar: String,
   },
   doctor: {
-    ref: mongoose.Types.ObjectId,
+    ref: { type: mongoose.Types.ObjectId, ref: 'Doctor' },
     name: String,
     avatar: String,
   },
   user: {
-    ref: mongoose.Types.ObjectId,
+    ref: { type: mongoose.Types.ObjectId, ref: 'User' },
     name: String,
     avatar: String,
   },
@@ -30,4 +30,11 @@ const clinicSchema = new Schema({
   }],
 });
 
-module.exports = mongoose.model('User', clinicSchema);
+reservationSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform(doc, ret) {
+    delete ret._id;
+  },
+});
+module.exports = mongoose.model('Reservation', reservationSchema);

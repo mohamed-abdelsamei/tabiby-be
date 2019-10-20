@@ -1,11 +1,13 @@
-const Clinic = require('./../models/clinic.model');
-const Speciality = require('./../models/speciality.model');
+const ClinicService = require('../services/clinic.service');
+const SpecialityModel = require('./../models/speciality.model');
+const ClinicModel = require('./../models/clinic.model');
 
 module.exports.create = async (req, res, next) => {
   try {
     const { name, address, phone } = req.body;
     const payload = { name, address, phone };
-    const clinic = await Clinic.create(payload);
+    const clinicService = new ClinicService(ClinicModel);
+    const clinic = await clinicService.createClinic(payload);
     res.json(clinic);
   } catch (error) {
     next(error);
@@ -13,35 +15,40 @@ module.exports.create = async (req, res, next) => {
 };
 
 module.exports.find = async (req, res, next) => {
-  const clinics = await Clinic.find(req.query);
+  const clinicService = new ClinicService(ClinicModel);
+  const clinics = await clinicService.findAll(req.query);
   res.json(clinics);
 };
 
 
 module.exports.findOne = async (req, res, next) => {
   const { id } = req.params;
-  const clinic = await Clinic.findById(id);
+  const clinicService = new ClinicService(ClinicModel);
+  const clinic = await clinicService.findOne({ _id: id });
   res.json(clinic);
 };
 
 module.exports.update = async (req, res, next) => {
   const { id } = req.params;
-  const clinic = await Clinic.findByIdAndUpdate(id, req.body, { new: true });
+  const payload = req.body;
+  const clinicService = new ClinicService(ClinicModel, SpecialityModel);
+  const clinic = await clinicService.updateClinic({ _id: id }, payload);
   res.json(clinic);
 };
 
 module.exports.updateSpeciality = async (req, res, next) => {
   const { id } = req.params;
-  const { specId } = req.body;
-  const speciality = await Speciality.findById(specId);
-  if (!speciality) return res.status(404).json({ msg: 'spec not found' });
-  const clinic = await Clinic.findByIdAndUpdate(id, req.body, { new: true });
+  const { speciality } = req.body;
+  const clinicService = new ClinicService(ClinicModel, SpecialityModel);
+  const clinic = await clinicService.updateSpeciality(id, speciality);
   res.json(clinic);
 };
 
 
 module.exports.remove = async (req, res, next) => {
   const { id } = req.params;
-  const clinic = await Clinic.findByIdAndRemove(id);
+  const clinicService = new ClinicService(ClinicModel);
+
+  const clinic = await clinicService.removeClinic(id);
   res.json(clinic);
 };

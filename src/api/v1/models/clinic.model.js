@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -8,12 +10,12 @@ const clinicSchema = new Schema({
   phone: { type: String },
   gellery: [],
   doctor: {
-    ref: mongoose.Types.ObjectId,
+    ref: { type: mongoose.Types.ObjectId, ref: 'Doctor' },
     name: String,
     avatar: String,
   },
   nurses: [{
-    ref: mongoose.Types.ObjectId,
+    ref: { type: mongoose.Types.ObjectId, ref: 'Nurse' },
     name: String,
     avatar: String,
   }],
@@ -21,7 +23,7 @@ const clinicSchema = new Schema({
   rate: { type: String },
   fees: { type: String },
   speciality: {
-    ref: { type: mongoose.Schema.Types.ObjectId },
+    ref: { type: mongoose.Schema.Types.ObjectId, ref: 'Speciality' },
     name: { type: String },
     nameAr: { type: String },
   },
@@ -37,4 +39,21 @@ const clinicSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('User', clinicSchema);
+clinicSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform(doc, ret) { delete ret._id; },
+});
+
+clinicSchema.methods = {
+  minView() {
+    const {
+      id, name, address, phone,
+    } = this;
+    return {
+      id, name, address, phone,
+    };
+  },
+};
+
+module.exports = mongoose.model('Clinic', clinicSchema);

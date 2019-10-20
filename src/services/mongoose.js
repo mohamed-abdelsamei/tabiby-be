@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { mongo, env } = require('./../config');
+const { mongo, env } = require('../config');
 
 // set mongoose Promise to Bluebird
 mongoose.Promise = Promise;
