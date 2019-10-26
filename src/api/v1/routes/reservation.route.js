@@ -1,70 +1,44 @@
 const express = require('express');
 const validate = require('express-validation');
 
-const controller = require('./../controllers/clinic.controller');
-const { create, findOne } = require('../validations/clinic.validation');
-
 const router = express.Router();
 
+
 /**
  * @swagger
- * /clinics:
+ *  /reservation:
+ *   get:
+ *     summary: Get all reservations
+ *     tags:
+ *       -  Reservation
+ *     description: view clinic reservations.
+ *     operationId: getReservations
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Successfully listed.
+ *       400:
+ *         description: Invalid input.
+ *         schema:
+ *       500:
+ *         description: Internal error.
+ *         schema:
+ */
+router.get('/reservation', (req, res, next) => { });
+
+/**
+ * @swagger
+ *  /reservation:
  *   post:
+ *     summary: Create a reservation
  *     tags:
- *       - Clinic
- *     description: Create new Clinic.
- *     operationId: createClinic
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
-
-  *     responses:
- *       200:
- *         description: Successfully listed.
- *       400:
- *         description: Invalid input.
- *         schema:
- *       500:
- *         description: Internal error.
- *         schema:
- */
-router.post('/', validate(create), controller.create);
-
-/**
- * @swagger
- * /clinics:
- *   get:
- *     tags:
- *       - Clinic
- *     description: search for a clinics.
- *     operationId: searchClinic
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
-
-  *     responses:
- *       200:
- *         description: Successfully listed.
- *       400:
- *         description: Invalid input.
- *         schema:
- *       500:
- *         description: Internal error.
- *         schema:
- */
-router.get('/', controller.find);
-/**
- * @swagger
- * /clinics/{id}:
- *   get:
- *     tags:
- *       - Clinic
- *     description: find clinic By ID.
- *     operationId: findClinicById
+ *       -  Reservation
+ *     description: create reservation.
+ *     operationId: createReservation
  *     consumes:
  *       - application/json
  *     produces:
@@ -80,15 +54,43 @@ router.get('/', controller.find);
  *         description: Internal error.
  *         schema:
  */
-router.get('/:id', validate(findOne), controller.findOne);
+router.post('/reservation', (req, res, next) => { });
+
 /**
  * @swagger
- * /clinics/{id}:
+ *  /reservation/{id}:
+ *   get:
+ *     summary: Find a reservation by ID
+ *     tags:
+ *       -  Reservation
+ *     description: view reservation.
+ *     operationId: getReservation
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: Successfully listed.
+ *       400:
+ *         description: Invalid input.
+ *         schema:
+ *       500:
+ *         description: Internal error.
+ *         schema:
+ */
+router.get('/reservation/:id', (req, res, next) => { });
+
+/**
+ * @swagger
+ *  /reservation/{id}:
  *   put:
+ *     summary: Edit a reservation by ID
  *     tags:
- *       - Clinic
- *     description: uodate clinic by id.
- *     operationId: updateClinicById
+ *       -  Reservation
+ *     description: update reservation.
+ *     operationId: updateReservation
  *     consumes:
  *       - application/json
  *     produces:
@@ -104,31 +106,34 @@ router.get('/:id', validate(findOne), controller.findOne);
  *         description: Internal error.
  *         schema:
  */
-router.put('/:id', controller.update);
-/**
- * @swagger
- * /clinics/{id}:
- *   delete:
- *     tags:
- *       - Clinic
- *     description: delete clinic by id.
- *     operationId: deleteClinicById
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
- *     responses:
- *       200:
- *         description: Successfully listed.
- *       400:
- *         description: Invalid input.
- *         schema:
- *       500:
- *         description: Internal error.
- *         schema:
- */
-router.delete('/:id', controller.remove);
+router.put('/reservation/:id', (req, res, next) => { });
 
+
+/**
+* @swagger
+*  /reservation/{id}:
+*   delete:
+*     summary: Delete a reservation by ID
+*     tags:
+*       -  Reservation
+*     description: delete reservation.
+*     operationId: deleteReservation
+*     consumes:
+*       - application/json
+*     produces:
+*       - application/json
+*     parameters:
+*     responses:
+*       200:
+*         description: Successfully listed.
+*       400:
+*         description: Invalid input.
+*         schema:
+*       500:
+*         description: Internal error.
+*         schema:
+*/
+
+router.delete('/reservation/:id', (req, res, next) => { });
 
 module.exports = router;

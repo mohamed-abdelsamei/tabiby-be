@@ -1,6 +1,7 @@
 {
   "name": "tabiby-be",
   "version": "0.0.0",
+  "author": "Mohamed Essam",
   "private": true,
   "scripts": {
     "start": "NODE_ENV=dev nodemon ./bin/www",

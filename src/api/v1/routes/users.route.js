@@ -3,10 +3,10 @@ const express = require('express');
 const router = express.Router();
 /**
  * @swagger
- * /users:
+ * /user:
  *   get:
  *     tags:
- *       - Users
+ *       - User
  *     description: find all users.
  *     operationId: findUsers
  *     consumes:
@@ -24,6 +24,49 @@ const router = express.Router();
  *         description: Internal error.
  *         schema:
  */
+/**
+ * @swagger
+ * /user/me:
+ *  get:
+ *    tags:
+ *      - User
+ */
+
+/**
+* @swagger
+* /user/login:
+*  get:
+*    tags:
+*      - User
+*/
+/**
+* @swagger
+* /user/signup:
+*  post:
+*    tags:
+*      - User
+*/
+/**
+* @swagger
+* /user/{username}:
+*  get:
+*    tags:
+*      - User
+*/
+/**
+* @swagger
+* /user/{username}:
+*  put:
+*    tags:
+*      - User
+*/
+/**
+* @swagger
+* /user/{username}:
+*  delete:
+*    tags:
+*      - User
+*/
 router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
